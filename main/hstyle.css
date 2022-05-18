@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&family=Roboto:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+a,
+button{
+    color: whitesmoke;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/*Ayos background*/
+.navbar{
+    height:100vh;
+    width: 100%;
+    background: url(../images/bgmain.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.nav_links{
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav_links img{
+    height: 70px;
+    width: 70px;
+    margin-top: 8px;
+    margin-right: auto;
+    margin-left: 35px;
+}
+
+.nav_links li{
+    list-style: none;
+    display: inline-block;
+    padding: 0 14px;
+}
+
+.nav_links li a{
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover{
+    color: rgb(10, 23, 75);
+}
+
+.nav_links li,
+.nav_links .btn{
+    margin-right: 50px;
+}
+
+.nav_links .btn button{
+    padding: 7px 45px;
+    background-color: rgb(10, 22, 33);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links .btn button:hover{
+    background-color: rgb(1, 4, 7);
+}
+
+/*this is for the placement of caption*/
+.content .caption{
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translateY(-50%);
+}
+
+/*this is for the placement of date and time*/
+.content .clock{
+    position: fixed;
+    top: 20%;
+    right: 8%;
+    transform: translateY(50%);
+    font-size: 75px;
+    font-family: "Poppins", sans-serif;
+    color: aliceblue;
+}
+
+.content .date{
+    position: fixed;
+    top: 40%;
+    right:3.5%;
+    justify-content: right;
+    transform: translate(120px, 50%);
+}
+/*this is for the date and time*/
+.date{
+    font-size: 15px;
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    color: rgb(10, 22, 33);
+    width: 340px;
+    padding: 16px 10px;
+    margin-right: 44px;
+}
+
+/*design for content*/
+.caption .text-1{
+    font-size: 120px;
+    font-weight: 700;
+    font-family: "Archivo", sans-serif;
+    color: rgb(92, 31, 25);
+}
+
+.caption .text-2{
+    margin-left: 8px;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: "Archivo", sans-serif;
+    color: rgb(92, 31, 25);
+}
+
+.content .entry button{
+    margin-top: 20px;
+    margin-left: 4px;
+    padding: 7px 45px;
+    background-color: rgb(50, 14, 11);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.content .entry button:hover{
+    transform: scale(1.2);
+}
+

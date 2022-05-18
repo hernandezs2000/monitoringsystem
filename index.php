@@ -1,12 +1,5 @@
 <?php
 
-$host = "ec2-52-5-110-35.compute-1.amazonaws.com";
-$db = "dfshrm73187voc";
-$user = "kwghlljgrgjxpa";
-$password = "38cbea1d18d5dcdcc3be9a60a57a3fd1db2f264b100a01db73d08a4f3bb3c958";
-
-new PDO("pgsql:host=$host;port=5432;dbname=$db;", $user, $password);
-
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +15,16 @@ new PDO("pgsql:host=$host;port=5432;dbname=$db;", $user, $password);
         <div class="container">
             <div class="cover">
                 <div class="front">
-                    <img src="images/plm1.jpg" alt="">
+                    <img src="images/students.jpg" alt="">
+                    <div class="text">
+                    <span class="text-1">BE INFORMED</span><br>
+                    <span class="text-2">BE PREPARED</span><br>
+                    <span class="text-3">BE SMART</span><br>
+                    <span class="text-4">BE SAFE</span>
+                    </div>
                 </div>
             </div>
-            <form action="monitor/monitor.html" class="loginForm" method="post">
+            <form action="main/home.php" class="loginForm" method="post">
                 <div class="form-content">
                     <div class="login-form">
                         <div class="title">Login</div>
@@ -33,7 +32,7 @@ new PDO("pgsql:host=$host;port=5432;dbname=$db;", $user, $password);
                             <div class="input-box">
                                 <img src="images/mail.png">
                                 <input type="text" name="username" placeholder="Enter your username">
-                                <span class="error-message"></span>
+
                             </div>
                             <div class="password-box">
                                 <img src="images/password.png">
