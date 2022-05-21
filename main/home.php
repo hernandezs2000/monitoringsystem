@@ -1,7 +1,8 @@
 <?php
 echo '<script type="text/javascript">realtimeClock();</script>';
 echo '<script type="text/javascript">initClock();</script>';
-    ?>
+
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -23,7 +24,7 @@ echo '<script type="text/javascript">initClock();</script>';
                   <li><a href="/admin/admin.php">Admin Panel</a></li>
                   <li><a href="/student/student.php">Student Profile</a></li>
                 </ul>
-                <a href="#" class="btn"><button>Logout</button></a>
+                <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
           <div class="content">

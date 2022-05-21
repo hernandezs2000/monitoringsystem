@@ -1,4 +1,11 @@
 <?php
+//$ch = curl.init();
+
+//security something;default
+//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// url to use, GET info
+//curl_setopt($ch, CURLOPT_URL, 'http://gatesystemapi.herokuapp.com/users/');
 
 ?>
 
@@ -41,7 +48,7 @@
                             </div>
                             <div class="buttoninput-box1">
                                <!-- <img src="images/password.png"> -->
-                                <input type="submit" id="submit" value="Submit">
+                                <input type="submit" id="submit" action="/main/home.php" value="Login">
                             </div>
                         </div>
                     </div>

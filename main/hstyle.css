@@ -95,7 +95,7 @@ button{
 .content .date{
     position: fixed;
     top: 40%;
-    right:3.5%;
+    right:2%;
     justify-content: right;
     transform: translate(120px, 50%);
 }
