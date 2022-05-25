@@ -44,18 +44,18 @@ form .form-content .buttoninput-box1{
     margin: 30px 0px;
     position: relative;
 }
-form .form-content .buttoninput-box1 input{
+form .form-content .buttoninput-box1 button{
     background: rgb(108, 108, 108);
     color: rgb(223, 222, 222);
     border-radius: 9px;
 }
-form .form-content .buttoninput-box1 input:hover{
+form .form-content .buttoninput-box1 button:hover{
     color: rgb(223, 222, 222);
     background: #044642;
     transition: all 0.5s ease;
 }
 .form-content .input-boxes input,
-.form-content .buttoninput-box1 input{
+.form-content .buttoninput-box1 button{
     height: 100%;
     width: 100%;
     outline: none;
@@ -66,10 +66,10 @@ form .form-content .buttoninput-box1 input:hover{
     border-bottom: 2px solid rgba(0, 0, 0,0.2);
 }
 .form-content .input-boxes input:focus,
-.form-content .buttoninput-box1 input:focus{
+.form-content .buttoninput-box1 button:focus{
     border-bottom: 2px solid #044642;
 }
-.form-content .buttoninput-box1 input{
+.form-content .buttoninput-box1 button{
     margin-top: 40px;
     margin-bottom: 20px;
 
@@ -175,4 +175,8 @@ form .form-content .title::before{
 
 form .signup-form .title::before{
     width: 20px;
+}
+
+.error{
+    color: red;
 }

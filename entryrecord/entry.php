@@ -1,5 +1,4 @@
-<?php
-?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -23,10 +22,20 @@
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
-          <div class="adminp">
-
-          </div>
+          <table class="entrant">
+            <tr>
+              <th>Name</th>
+              <th>Vaccination Status</th>
+              <th>Health Declaration</th>
+              <th>Temperature (Celsius) </th>
+              <th>Date</th>
+              <th>Entry</th>
+              <th>Denied</th>
+            </tr>
+            <?php
+            
+            ?>
+          </table>
         </div>
-
         </body>
 </html>

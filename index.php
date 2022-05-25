@@ -1,14 +1,3 @@
-<?php
-//$ch = curl.init();
-
-//security something;default
-//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// url to use, GET info
-//curl_setopt($ch, CURLOPT_URL, 'http://gatesystemapi.herokuapp.com/users/');
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -29,31 +18,40 @@
                     <span class="text-3">BE SMART</span><br>
                     <span class="text-4">BE SAFE</span>
                     </div>
-                </div>
+                </div> 
             </div>
-            <form action="main/home.php" class="loginForm" method="post">
+            <form class="loginForm" action="/main/home.php" method="POST">
                 <div class="form-content">
                     <div class="login-form">
                         <div class="title">Login</div>
                         <div class="input-boxes">
                             <div class="input-box">
                                 <img src="images/mail.png">
-                                <input type="text" name="username" placeholder="Enter your username">
+                                <input type="text" name="email" placeholder="Enter your username or e-mail">
 
                             </div>
                             <div class="password-box">
                                 <img src="images/password.png">
                                 <input type="password" name="password" placeholder="Enter your password">
-                                <span class="error-message"></span>
                             </div>
                             <div class="buttoninput-box1">
                                <!-- <img src="images/password.png"> -->
-                                <input type="submit" id="submit" action="/main/home.php" value="Login">
+                                <button type="submit" name="submit">Login</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+            <?php
+                $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                if (strpos($fullUrl, "login=incomplete") == true){
+                    echo "<p class='error'>You did not fill in all fields!</p>";
+                } elseif (strpos($fullUrl, "login=char") == true){
+                    echo "<p class='error'>You have entered incorrect details</p>";
+                }
+            ?>
         </div>
     </body>
 </html>
+
+
