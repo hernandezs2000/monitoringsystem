@@ -23,8 +23,21 @@
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
-          <div class="adminp">
+          <div class="container">
+            <form action="">
+              <input type="text" placeholder="search user" name="q"></input>
+              <button type="submit"><img src="/images/search.png"></button>
+            </form>
+          </div>
+          <?php
+          $stringD = file_get_contents("http://gatesystemapi.herokuapp.com/users/"); // lagay dito si Noel, as of now di pa
+          $jsonData = json_decode($stringD, true); //ginawa json to string
 
+          $jsonEmail = $jsonData['results'][0]['email'];;
+          echo $jsonData;
+          //for login talaga na code
+
+          ?>
           </div>
         </div>
 

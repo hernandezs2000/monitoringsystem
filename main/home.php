@@ -8,37 +8,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   //get data from signup form
       $emUs = $_POST['email'];
       $password = $_POST['password'];
-      $data = http_build_query(array (
+      $data =array (
         'username' => $emUs,
         'password' => $password
-      ));
+      );
      // $optional_headers = null;
 
       //Check for invalid shit 
       if(!empty($emUs) && !empty($password)){
-        function do_post_request($url, $data, $optional_headers = null)
-        {
-          $params = array('http' => array(
-                      'method' => 'POST',
-                      'content' => $data
-                    ));
-          if ($optional_headers !== null) {
-            $params['http']['header'] = $optional_headers;
-          }
-          $ctx = stream_context_create($params);
-          $fp = @fopen($url, 'rb', false, $ctx);
-          if (!$fp) {
-            throw new Exception("Problem with $url, $php_errormsg");
-          }
-          $response = @stream_get_contents($fp);
-          if ($response === false) {
-            throw new Exception("Problem reading data from $url, $php_errormsg");
-          }
-          return $response;
-          print_r($response);
+        $postdata = json_encode($data);
+        
+        $ch = curl_init($url); 
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        $result = curl_exec($ch);
+        curl_close($ch);
 
-        }
-
+      if($result == 200){
+        header("Location:../main/home.php");
+        exit(); 
+      } else{
+        header("Location:../index.php");
+        exit(); 
+      } 
         } elseif(empty($emUs) && empty($password)){
         header("Location:../index.php?login=incomplete");
         exit();          

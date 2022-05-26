@@ -48,6 +48,8 @@
                     echo "<p class='error'>You did not fill in all fields!</p>";
                 } elseif (strpos($fullUrl, "login=char") == true){
                     echo "<p class='error'>You have entered incorrect details</p>";
+                }elseif (strpos($fullUrl, "index.php") == true){
+                    echo "<p class='error'>You entered nonexistent credentials</p>";
                 }
             ?>
         </div>
