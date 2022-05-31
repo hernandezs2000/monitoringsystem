@@ -20,10 +20,9 @@
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
-          <div class="adminp">
+          <div class="cont2">
           <?php
          echo '<script type="text/javascript">idAuth();</script>';
-         
          
          //result ng id number
          $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
