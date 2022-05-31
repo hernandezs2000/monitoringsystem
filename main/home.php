@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         $result = curl_exec($ch);
         curl_close($ch);
-
+      //  var_dump($result);
+    //    consolelog($result);
       if($result == 200){
-        header("Location:../main/home.php");
-        exit(); 
+
+
       } else{
-        header("Location:../index.php");
-        exit(); 
+   
       } 
         } elseif(empty($emUs) && empty($password)){
         header("Location:../index.php?login=incomplete");
@@ -45,12 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
              }      
                   
             } else{
-              header("Location:../index.php");
-              exit();
-            }       
+           }       
         } else{
-          header("Location:../index.php");
-          exit();
         }
 
       
@@ -74,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <ul class="list">
                   <li><a href="home.php"`>Home</a></li>
                   <li><a href="/admin/admin.php">Admin Panel</a></li>
-                  <li><a href="/student/student.php">Student Profile</a></li>
+                  <li><a href="/student/student.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
@@ -82,8 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
           <div class="content">
             <div class="caption">
               <span class="text-1">Monitor</span><br>
-              <span class="text-2">the entry of students</span><br>
-              <a href="/entryrecord/entry.php" class="entry"><button>Live Entry Record</button></a>
+              <span class="text-2">the entry of users</span><br>
+              <a href="/entryrecord/entry.php" class="entry"><button>Entry Record</button></a>
             </div>
             <div class="date">
               <span id="dayname">Day</span>,
