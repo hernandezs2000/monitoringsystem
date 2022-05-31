@@ -1,3 +1,6 @@
+<?php
+//echo '<script type="text/javascript">POSTReq();</script>';
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -20,19 +23,19 @@
                     </div>
                 </div> 
             </div>
-            <form class="loginForm" action="/main/home.php" method="POST">
+            <form class="loginForm" id="form" action="/main/home.php" method="POST">
                 <div class="form-content">
                     <div class="login-form">
                         <div class="title">Login</div>
                         <div class="input-boxes">
                             <div class="input-box">
                                 <img src="images/mail.png">
-                                <input type="text" name="email" placeholder="Enter your username or e-mail">
+                                <input type="text" name="email"  id="email" placeholder="Enter your username or e-mail">
 
                             </div>
                             <div class="password-box">
                                 <img src="images/password.png">
-                                <input type="password" name="password" placeholder="Enter your password">
+                                <input type="password" name="password" id="password" placeholder="Enter your password">
                             </div>
                             <div class="buttoninput-box1">
                                <!-- <img src="images/password.png"> -->
@@ -42,14 +45,6 @@
                     </div>
                 </div>
             </form>
-            <?php
-                $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                if (strpos($fullUrl, "login=incomplete") == true){
-                    echo "<p class='error'>You did not fill in all fields!</p>";
-                } elseif (strpos($fullUrl, "login=char") == true){
-                    echo "<p class='error'>You have entered incorrect details</p>";
-                }
-            ?>
         </div>
     </body>
 </html>

@@ -18,7 +18,7 @@
                 <ul class="list">
                   <li><a href="/main/home.php"`>Home</a></li>
                   <li><a href="admin.php">Admin Panel</a></li>
-                  <li><a href="/student/student.php">User Profile</a></li>
+                  <li><a href="/user/user.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>

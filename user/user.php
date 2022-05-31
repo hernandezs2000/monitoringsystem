@@ -15,7 +15,7 @@
                 <ul class="list">
                   <li><a href="/main/home.php"`>Home</a></li>
                   <li><a href="/admin/admin.php">Admin Panel</a></li>
-                  <li><a href="student.php">User Profile</a></li>
+                  <li><a href="user.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
@@ -58,7 +58,7 @@
                     $place = array_search($post, $user); //int na pangilan yung user
                     echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th</tr></thead>";
                     if(!empty($user) && !empty($id) && !empty($email)){
-                       echo "<tr><td><a href = 'info.php?id={$id[$place]}'>".$id[$place]."</a></td><td>".$user[$place]."</td><td>".$email[$place]."</td></tr>";  
+                       echo "<tr><td><a href = '/user/info.php?id={$id[$place]}'>".$id[$place]."</a></td><td>".$user[$place]."</td><td>".$email[$place]."</td></tr>";  
                        echo "</table>";
                    }                  
                   } else{ // paghindi nageexist
@@ -74,7 +74,7 @@
                     echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th</tr></thead>";
                    if(!empty($user) && !empty($id) && !empty($email)){
                     while(($count - $row - 1) >= 0){
-                      echo "<tr><td><a href = 'info.php?id={$id[$count -$row - 1]}'>".$id[$count -$row - 1]."</a></td><td>".$user[$count -$row - 1]."</td><td>".$email[$count -$row - 1]."</td></tr>";
+                      echo "<tr><td><a href = '/user/info.php?id={$id[$count -$row - 1]}'>".$id[$count -$row - 1]."</a></td><td>".$user[$count -$row - 1]."</td><td>".$email[$count -$row - 1]."</td></tr>";
                       $row++;
                     }
                       echo "</table>";
@@ -88,7 +88,7 @@
             echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th</tr></thead>";
            if(!empty($user) && !empty($id) && !empty($email)){
             while(($count - $row - 1) >= 0){
-              echo "<tr><td><a href = 'info.php?id={$id[$count -$row - 1]}'>".$id[$count -$row - 1]."</a></td><td>".$user[$count -$row - 1]."</td><td>".$email[$count -$row - 1]."</td></tr>";
+              echo "<tr><td><a href = '/user/info.php?id={$id[$count -$row - 1]}'>".$id[$count -$row - 1]."</a></td><td>".$user[$count -$row - 1]."</td><td>".$email[$count -$row - 1]."</td></tr>";
               $row++;
             }
               echo "</table>";

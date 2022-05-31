@@ -16,23 +16,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
       //Check for invalid shit 
       if(!empty($emUs) && !empty($password)){
-        $postdata = json_encode($data);
-        
-        $ch = curl_init($url); 
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        $result = curl_exec($ch);
-        curl_close($ch);
-      //  var_dump($result);
-    //    consolelog($result);
-      if($result == 200){
 
+       // Create a new cURL resource
+       $ch = curl_init($url);
 
-      } else{
-   
-      } 
+       // Setup request to send json via POST`
+       $payload = json_encode(array(
+           'username' => $emUs,
+           'password' => $password
+       )
+       );
+
+       // Attach encoded JSON string to the POST fields
+       curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+       // Set the content type to application/json
+       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+
+       // Return response instead of outputting
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+       // Execute the POST request
+       $result = curl_exec($ch);
+
+       // Get the POST request header status
+       $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+       // If header status is not Created or not OK, return error message
+       if ( $status !== 201 || $status !== 200 ) {
+           die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+       }
+
+       // Close cURL resource
+       curl_close($ch);
+
+       // if you need to process the response from the API further
+       $response = json_decode($result, true);
+
         } elseif(empty($emUs) && empty($password)){
         header("Location:../index.php?login=incomplete");
         exit();          
@@ -70,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <ul class="list">
                   <li><a href="home.php"`>Home</a></li>
                   <li><a href="/admin/admin.php">Admin Panel</a></li>
-                  <li><a href="/student/student.php">User Profile</a></li>
+                  <li><a href="/user/user.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
