@@ -30,7 +30,7 @@
                         <div class="input-boxes">
                             <div class="input-box">
                                 <img src="images/mail.png">
-                                <input type="text" name="email"  id="email" placeholder="Enter your username or e-mail">
+                                <input type="text" name="email"  id="email" placeholder="Enter your username">
 
                             </div>
                             <div class="password-box">

@@ -17,7 +17,6 @@
     position: fixed;
     height: 640px;
     width: 100%;
-    background: url(../images/bgsub.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -154,8 +153,15 @@ button{
 
 .thome .cont2{
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #044642;
+    top: 60%;
+    left: 50%;
+    width: 700px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    background: rgba(45, 90, 77, 0.4);
+    box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
+                15px 15px 15px rgba(0, 0, 0, 0.1),
+                inset -5px -5px 5px rgba(255, 255, 255, 0.2),
+                inset 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 

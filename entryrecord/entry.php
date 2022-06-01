@@ -22,6 +22,7 @@
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
+          <div class="recordbg">
           <table class="entrant">
             <tr>
               <th>Name</th>
@@ -36,6 +37,7 @@
             
             ?>
           </table>
+          </div>
         </div>
         </body>
 </html>
