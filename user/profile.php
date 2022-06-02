@@ -71,7 +71,7 @@
               <div class="profinfo"></div>   <!-- prof info--> 
             </div>
             <div class="vaccination">
-            // <button class="save">Save edit</button> 
+            <!--  <button class="save">Save edit</button> 
              <?php 
             
 
