@@ -21,17 +21,94 @@
             </div>
           </nav>
           <div class="cont2">
-          <?php
-         echo '<script type="text/javascript">idAuth();</script>';
-         
-         //result ng id number
-         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-         parse_str($query, $result);
-         $idnum = intval($result["id"]);
-          if($idnum != null){
-          
-         }
-          ?>
+               <!-- ito for container ng profile -->
+
+               <?php
+              //result ng id number for new url
+                 $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+                 parse_str($query, $result);
+                 //$idnum = intval($result["id"]);
+                 $idnum = $result["id"];
+                 print_r($idnum);
+
+
+                  $url = file_get_contents("http://gatesystemapi.herokuapp.com/users/");
+                  $stringD = json_decode($url);
+                  $count = $stringD -> count;
+                  $count = intval($count);
+                  $results = $stringD -> results;
+
+                 for($ctr = 0; $ctr <= $count-1; $ctr++){
+                   $id = $results[$ctr] -> id;
+                   if($id == $idnum){
+                    //get mo yung email, link for dec and profilepic
+                    $email = $results[$ctr] -> email; // I GOT EMAIL NA ***
+                    $declaration = $results[$ctr] -> declaration[0];
+                    $profilepicture = $results[$ctr] -> profilepicture[0];
+                  }
+                 }
+
+                 //pasok dec
+                 $urldec = file_get_contents($declaration); 
+                 print_r($urldec);
+                 $urldecr = json_decode($urldec);
+
+
+                //got them all na *** 
+                $firstn = $urldecr -> first_name; 
+                $midn = $urldecr -> middle_name;
+                $lastn = $urldecr -> last_name;
+                $age =  $urldecr -> age;
+                $vacstat = $urldecr -> vaccinated;
+
+                //paso profpic
+                $urlprofp = file_get_contents($profilepicture); 
+                $urlprofpr = json_decode($urlprofp);
+                $profpic = $urlprofpr -> image;
+
+              ?>
+            <div class="contpic">
+              <!-- container ng prof and profinfo -->
+              <div class="profile"></div>   <!-- profile -->
+              <div class="profinfo"></div>   <!-- prof info--> 
+            </div>
+            <div class="vaccination">
+             <button class="save">Save edit</button> 
+             <?php //---------------------------------------------------------------------------------------PATCH***********keri na
+            
+
+
+            $curl = curl_init($declaration);
+            curl_setopt($curl, CURLOPT_URL, $declaration);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            
+            $headers = array(
+               "Accept: application/json",
+               "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+            
+            $data= json_encode( 
+              array(
+                'vaccinated' => false,
+                'fever' => false,
+              )
+            );
+            
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            
+            //for debug only!
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
+
+
+             ?>
+            </div>
           </div>
         </div>
 

@@ -38,7 +38,6 @@
                                 <input type="password" name="password" id="password" placeholder="Enter your password">
                             </div>
                             <div class="buttoninput-box1">
-                               <!-- <img src="images/password.png"> -->
                                 <button type="submit" name="submit">Login</button>
                             </div>
                         </div>

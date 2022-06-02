@@ -10,15 +10,15 @@
     
 }
 .thome{
-    position: fixed;
+    position: absolute;
     height: 640px;
     width: 100%;
-    background: url(../images/bgsub.jpg) no-repeat;
-    position: fixed;
+    background: url(../images/bgsub.jpg);
     height: 640px;
     width: 100%;
     background-size: cover;
     background-position: center;
+    background-attachment: scroll;
 }
 
 .thome .navbar{
@@ -52,11 +52,13 @@ button{
     border-collapse: collapse;
     margin-top: 50px;
     margin-left: 260px;
-    font-size: 20px;
+    font-size: 18px;
     min-width: 690px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    background-attachment: scroll;
 
 }
 
@@ -70,6 +72,22 @@ button{
     text-align: center;
     
 }
+
+.table td a{
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 22px;
+    transition: 0.4s ease-in;
+}
+.table td a:hover{
+    color: #044642;
+}
+
+
+.table td[name="users"] {
+    text-align: center;
+  }
 
 .nav_links img{
     height: 70px;
@@ -157,11 +175,15 @@ button{
     left: 50%;
     width: 700px;
     height: 500px;
+    border-radius: 3%;
     transform: translate(-50%, -50%);
-    background: rgba(45, 90, 77, 0.4);
+    background:  #82a7b3b8;
     box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
-                15px 15px 15px rgba(0, 0, 0, 0.1),
-                inset -5px -5px 5px rgba(255, 255, 255, 0.2),
-                inset 5px 5px 5px rgba(0, 0, 0, 0.1);
+                15px 15px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cont2 .contpic{
+    background: burlywood;
+    z-index: 2;
 }
 
