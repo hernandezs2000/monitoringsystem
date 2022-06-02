@@ -29,7 +29,6 @@
                  parse_str($query, $result);
                  //$idnum = intval($result["id"]);
                  $idnum = $result["id"];
-                 print_r($idnum);
 
 
                   $url = file_get_contents("http://gatesystemapi.herokuapp.com/users/");
@@ -50,7 +49,6 @@
 
                  //pasok dec
                  $urldec = file_get_contents($declaration); 
-                 print_r($urldec);
                  $urldecr = json_decode($urldec);
 
 
@@ -73,11 +71,12 @@
               <div class="profinfo"></div>   <!-- prof info--> 
             </div>
             <div class="vaccination">
-             <button class="save">Save edit</button> 
-             <?php //---------------------------------------------------------------------------------------PATCH***********keri na
+            // <button class="save">Save edit</button> 
+             <?php 
             
 
-
+//---------------------------------------------------------------------------------------PATCH***********keri na
+/*          
             $curl = curl_init($declaration);
             curl_setopt($curl, CURLOPT_URL, $declaration);
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
@@ -104,8 +103,7 @@
             
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
-
+ */
 
              ?>
             </div>

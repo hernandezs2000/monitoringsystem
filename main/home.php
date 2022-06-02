@@ -168,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE"){
       $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
       // If header status is not Created or not OK, return error message
-      if ( $status != 200 ) {
+      if ( $status != 204 ) {
         die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
       }
 
