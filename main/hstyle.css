@@ -17,11 +17,13 @@ button{
 
 /*Ayos background*/
 .navbar{
-    height:100vh;
+    height:100%;
     width: 100%;
-    background: url(../images/bgmain.png) no-repeat;
-    background-size: cover;
+    background: url(../images/bgmain.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     background-position: center;
+    overflow: hidden;
 }
 
 .nav_links{

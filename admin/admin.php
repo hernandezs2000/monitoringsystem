@@ -1,5 +1,5 @@
 <?php
-    $url= "http://gatesystemapi.herokuapp.com/api/register/"; // lagay dito si Noel
+ /*    $url= "http://gatesystemapi.herokuapp.com/api/register/"; // lagay dito si Noel
     //get data from signup form
 
 
@@ -46,7 +46,7 @@
 
       // if you need to process the response from the API further
       $response = json_decode($result, true);
-
+ */
 ?>
 
 <!DOCTYPE html>

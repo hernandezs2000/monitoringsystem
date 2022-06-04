@@ -27,76 +27,71 @@
               <button type="submit" name="submit"><img src="/images/search.png"></button>
             </form>
           </div>
+
           <table class = "table">
-          <?php
-          $jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/users/"); // json ito
-          $stringD = json_decode($jsonD);
-          $stringUser = $stringid = $stringemail = array();
-          //get number of users
-          $count = $stringD -> count;
-          $count = intval($count);
-          $x=0;
+            <?php
+            $jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/users/"); // json ito
+            $stringD = json_decode($jsonD);
+            $stringUser = $stringid = $stringemail = array();
+            //get number of users
+            $count = $stringD -> count;
+            $count = intval($count);
+            $x=0;
 
-          foreach($stringD -> results as $arr) {
-            $username0 = $arr -> username;
-            $email0 = $arr -> email;
-            $id0 = $arr -> id;
-            $user[] = $username0;
-            $id[] = $id0;
-            $email[] = $email0;
-          }
-
-
-          // pag nag post
-          if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(isset($_POST['submit'])){ 
+              foreach($stringD -> results as $arr) {
+                $username0 = $arr -> username;
+                $email0 = $arr -> email;
+                $id0 = $arr -> id;
+                $user[] = $username0;
+                $id[] = $id0;
+                $email[] = $email0;
+              }
 
 
-              if(!empty($_POST['q'])){ // pag may laman ang post
-                $post  = $_POST['q'];
-                  if(in_array($post, $user)){ // tingnan kung nandun yung user    WOOOW
-                    $place = array_search($post, $user); //int na pangilan yung user
-                    echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
+            // pag nag post
+              if ($_SERVER["REQUEST_METHOD"] == "POST"){
+               if(isset($_POST['submit'])){ 
+                if(!empty($_POST['q'])){ // pag may laman ang post
+                  $post  = $_POST['q'];
+                    if(in_array($post, $user)){ // tingnan kung nandun yung user    WOOOW
+                      $place = array_search($post, $user); //int na pangilan yung user
+                      echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
+                       if(!empty($user) && !empty($id) && !empty($email)){
+                        echo "<tr><td><a href = '/user/profile.php?id={$id[$place]}' name ='id'>".$id[$place]."</a></td><td name='users'>".$user[$place]."</td><td name='users'>".$email[$place]."</td></tr>";  
+                        echo "</table>";
+                       }                  
+                    } else{ // paghindi nageexist
+                      echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th</tr></thead>";
+                      echo "<tr><td name='users'>-</td><td name='users'>empty</td><td name='users'>empty</td</tr>";
+                      echo "</table>";
+                   }
+
+
+                } else{ //pag wala laman ang post WOOOW
+                  $row = 0; 
+                  echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
                     if(!empty($user) && !empty($id) && !empty($email)){
-                       echo "<tr><td><a href = '/user/profile.php?id={$id[$place]}' name ='id'>".$id[$place]."</a></td><td name='users'>".$user[$place]."</td><td name='users'>".$email[$place]."</td></tr>";  
-                       echo "</table>";
-                   }                  
-                  } else{ // paghindi nageexist
-                    echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th</tr></thead>";
-                    echo "<tr><td name='users'>-</td><td name='users'>empty</td><td name='users'>empty</td</tr>";
-                    echo "</table>";
-
+                      while(($count - $row - 1) >= 0){
+                        echo "<tr><td><a href = '/user/profile.php?id={$id[$count -$row - 1]}'  name ='id'>".$id[$count -$row - 1]."</a></td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td></tr>";
+                        $row++;
+                      }
+                        echo "</table>";
+                    }
                   }
-
-
-              } else{ //pag wala laman ang post WOOOW
-                    $row = 0; 
-                    echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
-                   if(!empty($user) && !empty($id) && !empty($email)){
+               }
+              } else{ //pag walang post WOOOWL
+                $row = 0; 
+                echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
+                  if(!empty($user) && !empty($id) && !empty($email)){
                     while(($count - $row - 1) >= 0){
                       echo "<tr><td><a href = '/user/profile.php?id={$id[$count -$row - 1]}'  name ='id'>".$id[$count -$row - 1]."</a></td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td></tr>";
                       $row++;
                     }
                       echo "</table>";
                   }
-              }
-            }
-
-
-          } else{ //pag walang post WOOOWL
-            $row = 0; 
-            echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
-           if(!empty($user) && !empty($id) && !empty($email)){
-            while(($count - $row - 1) >= 0){
-              echo "<tr><td><a href = '/user/profile.php?id={$id[$count -$row - 1]}'  name ='id'>".$id[$count -$row - 1]."</a></td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td></tr>";
-              $row++;
-            }
-              echo "</table>";
-          }
-          }
-         
-          ?>
-</table>
-         </div>
+                }
+            ?>
+          </table>
+        </div>
         </body>
 </html>

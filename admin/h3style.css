@@ -35,10 +35,12 @@ button{
 }
 .adminp{
     position: fixed;
-    height: 640px;
+    height: 100%;
     width: 100%;
     background: url(../images/bgsub.jpg) no-repeat;
     background-position: center;
+    background-size: 100% 100%;
+    overflow: auto;
 }
 
 .nav_links img{
