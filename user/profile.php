@@ -226,7 +226,7 @@
                             <label for="101">No</label>
                         </div>
 
-                        <button type = "submit">Save changes</button>
+                        <button type = "submit" name="submit">Save changes</button>
                       </form>
                             <?php
                              /* GET THE VALUES FROM THE FORM*/
