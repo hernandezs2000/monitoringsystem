@@ -28,7 +28,7 @@
               <th>Name</th>
               <th>Vaccination Status</th>
               <th>Health Declaration</th>
-              <th>Temperature (Celsius) </th>
+              <th>Temperature, <span>&#176;</span>C</th>
               <th>Date</th>
               <th>Entry</th>
               <th>Denied</th>

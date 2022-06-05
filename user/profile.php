@@ -144,7 +144,7 @@
                       <?php
                       /* YOU'LL BE GETTING THE VALUES OF DEC SAGOT*/
                       ?>
-                      <form class = "chck-box" method = "POST">
+                      <form class = "chck-box" action="../user/user.php?update=success" method = "POST">
                         
                         <div class = "q">
                           <h4>Q1: vaccinated</h4>
@@ -278,7 +278,7 @@
                                 
                                 $resp = curl_exec($curl);
                                 curl_close($curl);
-
+                                
                               }
                             ?>
                   </div>

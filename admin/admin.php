@@ -59,22 +59,31 @@
         <link rel="stylesheet" type="text/css" href="h3style.css">
     </head>
         <body>
-         <div class="thome"> 
-          <nav class="navbar">
-            <div class="nav_links">
-              <img src="/images/finallogo.png" alt="logo">
+          <div class="thome"> 
+            <nav class="navbar">
+              <div class="nav_links">
+                <img src="/images/finallogo.png" alt="logo">
                 <ul class="list">
                   <li><a href="/main/home.php"`>Home</a></li>
                   <li><a href="admin.php">Admin Panel</a></li>
                   <li><a href="/user/user.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
+              </div>
+            </nav>
+            <div class="adminp">
+              <div class = "content">
+                <div class = btn-card>
+                  <div class = "cont">
+                    <a href="#" class="register">Add authorized user</a>      
+                  </div>
+                </div>
+                <div class="table">
+                  <table>
+                  </table>
+                </div>
+               </div>
             </div>
-          </nav>
-          <div class="adminp">
-            <button name="register">Add</button>      
           </div>
-        </div>
-
         </body>
 </html>

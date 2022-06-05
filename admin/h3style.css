@@ -84,3 +84,78 @@ button{
 .nav_links .btn button:hover{
     background-color: rgb(1, 4, 7);
 }
+
+/* ----------------------------------NEW PART FOR TABLE --------------------------------*/
+
+/* Hatian for low height*/
+.content .table{
+    height: 85%;
+    background-color: #044642;
+}
+/* ------------------------------END OF NEW PART FOR TABLE -----------------------------*/
+
+/* Combination of top and bottom height */
+.thome .content{ 
+    margin-top: 18px;
+    margin-left: 90px;
+    width: 1100px;
+    height: 450px;
+    background: #fff;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(40px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Hatian for top height*/
+.content .btn-card{
+    height: 15%;
+/*     background-color: #68e2da; */
+}
+
+
+/*--------------------------------------- BUTTON -----------------------------------------*/
+.content .cont{
+    margin-top: 15px;
+    margin-left: 90px;
+    overflow: hidden;
+    position: fixed;
+    padding: 8px 26px;
+    color: #fff;
+    width: 200px;
+/*     border-radius: 30px; this is for button*/
+    box-shadow: 0 0 0 0 rgba(255, 188, 87, 0.5), 0 0 0 0 rgba(39, 200, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content .cont .register{
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.content .cont::after{
+    content:"";
+    width: 500px;
+    height: 600px;
+    position: absolute;
+    top: -70px;
+    left: -100px;
+    background-color: #ff3cac;
+    background-image: linear-gradient(
+        225deg, 
+        #27d86c 0%,
+        #41cfbe 50%,
+        #2d5d43 100%);
+        z-index: -1; 
+    transition: transform 0.5s ease;
+}  
+
+.content .cont:hover{
+    transform: translate(0, -6px);
+    box-shadow: 10px -10px 25px 0 rgba(255, 188, 87, 0.5), -10px 10px 25px 0 rgba(39, 200, 255, 0.5),
+    -10px 10px 25px 0 rgba(39, 200, 255, 0.5);
+}
+.content .cont:hover::after{
+    transform: rotate(150deg);
+}
