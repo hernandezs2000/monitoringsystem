@@ -228,6 +228,59 @@
 
                         <button type = "submit">Save changes</button>
                       </form>
+                            <?php
+                             /* GET THE VALUES FROM THE FORM*/
+                              if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                                if(isset($_POST['submit'])){
+                                  $one = $_POST['complete'];
+                                  $two =  $_POST['complete2'];
+                                  $three = $_POST['complete3'];
+                                  $four = $_POST['complete4'];
+                                  $five = $_POST['complete5'];
+                                  $six = $_POST['complete6'];
+                                  $seven = $_POST['complete7'];
+                                  $eight = $_POST['complete8'];
+                                  $nine = $_POST['complete9'];
+                                  $ten = $_POST['complete10'];
+                                }
+                                /* NOW YOU PUT THE PATCH REQUEST TO SEND THE VALUES*/
+                                $curl = curl_init($declaration);
+                                curl_setopt($curl, CURLOPT_URL, $declaration);
+                                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                                
+                                $headers = array(
+                                   "Accept: application/json",
+                                   "Content-Type: application/json",
+                                );
+                                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+                                
+                                $data= json_encode( 
+                                  array(
+                                    'vaccinated' => $one,
+                                    'fever' => $two,
+                                    'cough' => $three,
+                                    'sore_throat' => $four,
+                                    'headache' => $five,
+                                    'diarrhea' => $six,
+                                    'loss_of_taste_or_smell' => $seven,
+                                    'difficulty_of_breathing' => $eight,
+                                    'contact_with_cvd' => $nine,
+                                    'traveled_outside_ph' => $ten
+                                  )
+                                );
+                                
+                                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                                
+                                //for debug only!
+                                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+                                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                                
+                                $resp = curl_exec($curl);
+                                curl_close($curl);
+
+                              }
+                            ?>
                   </div>
                 </div>
               </div>
