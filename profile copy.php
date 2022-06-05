@@ -39,11 +39,10 @@
 
                  for($ctr = 0; $ctr <= $count-1; $ctr++){
                    $id = $results[$ctr] -> id;
-                   if($id == $idnum){
-                    //get mo yung email, link for dec and profilepic
-                    $email = $results[$ctr] -> email; // I GOT EMAIL NA ***
-                    $declaration = $results[$ctr] -> declaration[0];
-                    $profilepicture = $results[$ctr] -> profilepicture[0];
+                   if($id == $idnum){ //condition that shows that gotten value id is equal to the object id
+                    $email = $results[$ctr] -> email; // display email
+                    $declaration = $results[$ctr] -> declaration[0]; //url of declaration
+                    $profilepicture = $results[$ctr] -> profilepicture[0]; //url of profile picture
                   }
                  }
 
