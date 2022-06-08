@@ -74,11 +74,35 @@
                             $denied[] = $time[$ctr0]; 
                     }
                     }
-                
+                    
+                    $vaccount = count($vacstat);
+                    $rlvac = $vaccount - 1; /* number of user sa array -1 nung usrid*/
+                    $vacstat2 = array();
+                        for ($ctr0 = 0; $ctr0 <= $rlvac; $ctr0++){
+                            if($vacstat[$ctr0] == 1){
+                                $vacstat[$ctr0] = "Vaccinated";
+                            } else{
+                                $vacstat[$ctr0] = "Not accinated";
+                            }
+                            $vacstat2[] = $vacstat[$ctr0];
+                        }
+
+                        $statcount = count($stat);
+                        $rlstat = $statcount - 1; /* number of user sa array -1 nung usrid*/
+                        $stat3 = array();
+                            for ($ctr0 = 0; $ctr0 <= $rlstat; $ctr0++){
+                                if($stat[$ctr0] == 1){
+                                    $stat[$ctr0] = "OK";
+                                } else{
+                                    $stat[$ctr0] = "NOT";
+                                }
+                                $stat3[] = $stat[$ctr0];
+                            }
+    
                     $row = 0; 
                     echo "<thead><tr><th>ID</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
                         while(($countr - $row - 1) >= 0){
-                            echo "<tr><td>".$usrid[$countr -$row - 1]."</td><td name='username'>".$username[$countr -$row - 1]."</td><td name='vacstat'>".$vacstat[$countr -$row - 1]."</td><td>".$stat[$countr -$row - 1]."</td><td>".$temp[$countr -$row - 1]."</td><td>".$date[$countr -$row - 1]."</td><td>".$entry[$countr -$row - 1]."</td><td>".$denied[$countr -$row - 1]."<td></tr>";
+                            echo "<tr><td>".$usrid[$countr -$row - 1]."</td><td name='username'>".$username[$countr -$row - 1]."</td><td name='vacstat'>".$vacstat2[$countr -$row - 1]."</td><td>".$stat3[$countr -$row - 1]."</td><td>".$temp[$countr -$row - 1]."</td><td>".$date[$countr -$row - 1]."</td><td>".$entry[$countr -$row - 1]."</td><td>".$denied[$countr -$row - 1]."<td></tr>";
                             $row++;
                         }
                             echo "</table>"; 

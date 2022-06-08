@@ -80,3 +80,188 @@
 </html>
 
 
+//----------------------------------------REGISTER POST REQUEST----------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  if(isset($_POST['submit'])){
+    $url= "http://gatesystemapi.herokuapp.com/api/register/"; // lagay dito si Noel
+    //get data from signup form
+    $emUs = $_POST['email'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+
+    $data =array (
+      'username' => $emUs,
+      'password' => $password,
+      'email' => $email
+    );
+     // $optional_headers = null;
+      //Check for invalid shit 
+    if(!empty($emUs) && !empty($password) && !empty($email)){
+      // Create a new cURL resource
+      $ch = curl_init($url);
+
+      // Setup request to send json via POST`
+      $payload = json_encode( 
+        array(
+          'username' => $emUs,
+          'password' => $password,
+          'email' => $email
+        )
+      );
+
+      // Attach encoded JSON string to the POST fields
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+      // Set the content type to application/json
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+
+      // Return response instead of outputting
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      // Execute the POST request
+      $result = curl_exec($ch);
+
+      // Get the POST request header status
+      $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      // If header status is not Created or not OK, return error message
+      if ( $status != 200 ) {
+        die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+      }
+
+      if ( $status == 200 ) {
+        //include ikaw ng command para magrefresh yung page.
+
+        header("Location:../admin/admin.php");
+      } 
+
+      // Close cURL resource
+      curl_close($ch);
+
+      // if you need to process the response from the API further
+      $response = json_decode($result, true);
+
+    }  else{
+      header("Location:../index.php?login=incomplete");
+      exit();
+    }      
+                  
+  } else{
+  }       
+}
+
+//----------------------------------------USER DELETE REQUEST----------------------------------------------------------
+
+if ($_SERVER["REQUEST_METHOD"] == "DELETE"){
+  if(isset($_POST['Delete'])){
+    $url= `http://gatesystemapi.herokuapp.com/users/${id}`; // lagay dito si Noel
+    
+      $ch = curl_init($url);
+
+      // Setup request to send json via POST`
+      $payload = json_encode( 
+        array(
+          'username' => $emUs,
+          'password' => $password
+        )
+      );
+
+      // Attach encoded JSON string to the POST fields
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+      // Set the content type to application/json
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+
+      // Return response instead of outputting
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      // Execute the POST request
+      $result = curl_exec($ch);
+
+      // Get the POST request header status
+      $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      // If header status is not Created or not OK, return error message
+      if ( $status != 204 ) {
+        die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+      }
+
+      if ( $status == 204 ) {
+        die("User deleted.");
+      } 
+
+      // Close cURL resource
+      curl_close($ch);
+
+      // if you need to process the response from the API further
+      $response = json_decode($result, true);
+  }      
+}
+
+//----------------------------------------USER PATCH REQUEST----------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  if(isset($_POST['submit'])){
+    $url= "http://gatesystemapi.herokuapp.com/api/login/"; // lagay dito si Noel
+    //get data from signup form
+    $emUs = $_POST['email'];
+    $password = $_POST['password'];
+    $data =array (
+      'username' => $emUs,
+      'password' => $password
+    );
+     // $optional_headers = null;
+      //Check for invalid shit 
+    if(!empty($emUs) && !empty($password)){
+      // Create a new cURL resource
+      $ch = curl_init($url);
+
+      // Setup request to send json via POST`
+      $payload = json_encode( 
+        array(
+          'username' => $emUs,
+          'password' => $password
+        )
+      );
+
+      // Attach encoded JSON string to the POST fields
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+      // Set the content type to application/json
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+
+      // Return response instead of outputting
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      // Execute the POST request
+      $result = curl_exec($ch);
+
+      // Get the POST request header status
+      $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      // If header status is not Created or not OK, return error message
+      if ( $status != 200 ) {
+        die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+      }
+
+      if ( $status == 200 ) {
+        header("Location:../main/home.php");
+      } 
+
+      // Close cURL resource
+      curl_close($ch);
+
+      // if you need to process the response from the API further
+      $response = json_decode($result, true);
+
+    } elseif(empty($emUs) && empty($password)){
+      header("Location:../index.php?login=incomplete");
+      exit();          
+    }  elseif(!empty($emUs) && empty($password)){  
+      header("Location:../index.php?login=incomplete");
+      exit();
+    }  else{
+      header("Location:../index.php?login=incomplete");
+      exit();
+    }
+  }      
+}
