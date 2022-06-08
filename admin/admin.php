@@ -85,14 +85,50 @@
                 </div>
 
                 <div class="table">  <!-- dito labas yung mga profile card -->
-            
-                  <div class="user u1">
-                    <div class = "upper">
-                    </div>
-                    <div class = "lower">    
-                    </div>
-                  </div>
+                  <table class="user">
+                    <?php
+                        $url0 = file_get_contents("http://gatesystemapi.herokuapp.com/api/admin/");
+                        $file = json_decode($url0);
+                        $count = $file -> count;
+                        $rlcount = intval($count);
 
+                      foreach($file -> results as $arr) {
+                        $username0 = $arr -> username;
+                        $email0 = $arr -> email;
+                        $id0 = $arr -> id;
+                        $user[] = $username0;
+                        $id[] = $id0;
+                        $email[] = $email0;
+                      }
+
+                      $row = 0; 
+                      echo "<thead><tr><th>ID</th><th>Admins' username</th><th>E-mail</th><th>Operation</th></tr></thead>";
+                        if(!empty($user) && !empty($id) && !empty($email)){
+                          while(($rlcount - $row - 1) >= 0){
+                            echo "<tr><form method='POST'><td name ='id'>".$id[$count -$row - 1]."</td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td><td><button name='submit' value='".$id[$count -$row - 1]."'>Delete</button></td></form></tr>";
+                            $row++;
+                          }
+                            echo "</table>";
+                        }
+
+                        if($_SERVER["REQUEST_METHOD"] == "POST"){
+                          if(isset($_POST['submit'])){
+
+                            $url = "https://gatesystemapi.herokuapp.com/users/". $_POST['submit']."/";
+                            $ch = curl_init();
+                            $json = '';
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            $result = curl_exec($ch);
+                            $result = json_decode($result);
+                            curl_close($ch);
+                          }
+                        }
+                        ?>
+                  </table>
                 </div>
               </div>
             </div>
@@ -185,7 +221,9 @@
           curl_close($ch);
         }
       }
-    }        
+    } 
+
+
     ?>
         </body>
 </html>
