@@ -244,9 +244,8 @@
                                   $ten = $_POST['complete10'];
                                 }
 
-                                $dec = "https://gatesystemapi.herokuapp.com/declaration/";
+                                $dec = "https://gatesystemapi.herokuapp.com/declaration/".$idnum."/";
                                 $stringW = json_decode($url);
-                                $decla = $stringW -> results[2];
                                 /* NOW YOU PUT THE PATCH REQUEST TO SEND THE VALUES*/
                                 $curl = curl_init($dec);
                                 curl_setopt($curl, CURLOPT_URL, $dec);
@@ -282,7 +281,7 @@
                                 
                                 $resp = curl_exec($curl);
                                 curl_close($curl);
-                                
+
                               }
                             ?>
                   </div>

@@ -80,12 +80,30 @@ $temp = $allowed = $time = $date = $usrid = array();
         $usrid[] = $usrid0;
     } 
 
-print_r($temp); // FINALLY
+print_r($usrid); // FINALLY
 
 
+/* -------Get ko naman yung username, declaration -------------- */
+
+$idcount = count($usrid);
+$rlidc = $idcount - 1; /* number of user sa array -1 nung usrid*/
+$username = $vacstat = array();
+    for ($ctr0 = 0; $ctr0 <= $rlidc; $ctr0++){
+        $file1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/".$usrid[$ctr0]."/");
+        $filer1 = json_decode($file1);
+        $getdec = $filer1 -> declaration[0]; /* NAKUHA KO URL NA NEED KO TALAGA TO GET INFO  ABOUT EMAIL AND DECLARATION*/
+        $file2 = file_get_contents($getdec);
+        $filer2 = json_decode($file2);
+        $username0 = $filer2 -> owner;
+        $vacstat0 = $filer2 -> vaccinated; /* naka true, boolean */
+        $username[] = $username0;
+        $vacstat[] = $vacstat0; 
+    }
+
+    print_r($vacstat);
 /* ---------------------------------CODE FOR GETTING THE INFO PER EXISTING PAGES-------------- */
-/* for($ctr1 = $key; $ctr1 >= 1; $ctr1--){
-    $file = file_get_contents('https://gatesystemapi.herokuapp.com/entrance/?page='.$ctr.'');
+/* for($ctr2 = $key; $ctr2 >= 1; $ctr2--){
+    $file = file_get_contents('https://gatesystemapi.herokuapp.com/entrance/?page='.$ctr2.'');
 } */
 
 

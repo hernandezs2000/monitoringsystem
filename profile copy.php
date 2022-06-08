@@ -73,9 +73,8 @@
             <!--  <button class="save">Save edit</button> 
              <?php 
             
-
-//---------------------------------------------------------------------------------------PATCH***********keri na
-/*          
+/* ------------------------------------PATCH-- */
+         
             $curl = curl_init($declaration);
             curl_setopt($curl, CURLOPT_URL, $declaration);
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');

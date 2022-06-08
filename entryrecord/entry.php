@@ -1,8 +1,36 @@
 <?php
 /* display yung mga values */
 
+$jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/entrance/"); // json ito
+$stringD = json_decode($jsonD);
+$stringUser = $stringid = $stringemail = array();
+//get number of users
+$count = $stringD -> count;
+$count = intval($count-1);
+$results=$stringD -> results;
+
+for($ctr = $count; $ctr <= 0; $ctr--){
+  $id = $results[$ctr];  
+  print_r($id);
+}
+
+
 
 ?>
+<!-- if($id == $idnum){ //condition that shows that gotten value id is equal to the object id        
+     $username = $results[$ctr] -> username; // display username
+   //ifelse statements that make sure that dec, email, profpic are not null 
+   if(!empty($results[$ctr] -> declaration[0])){
+     $declaration = $results[$ctr] -> declaration[0]; //url of declaration
+   } else{
+     echo "no declaration status";
+   }
+   if(!empty($results[$ctr] -> email)){
+     $email = $results[$ctr] -> email; // display email
+   } else{
+     echo "no email";
+   }
+ } -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
