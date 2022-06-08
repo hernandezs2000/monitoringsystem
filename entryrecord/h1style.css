@@ -11,8 +11,9 @@
 
 .thome .navbar{
     width: 100%;
-    height:85px;
+    height: 85px;
     background-color: #044642;
+
 }
 
 a,
@@ -36,13 +37,12 @@ button{
     align-items: center;
 }
 .recordbg{
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
-   background: url(../images/bgsub.jpg) repeat-y; 
-    background-size: 100% 100%;
+    background: url(../images/bgsub.jpg) no-repeat; 
+    background-size: cover;
     background-position: center;
-    overflow: auto;
 }
 
 .nav_links img{
@@ -86,3 +86,50 @@ button{
 .nav_links .btn button:hover{
     background-color: rgb(1, 4, 7);
 }
+.content{
+    width: 100%;
+    height: 483px;
+    overflow: hidden;
+    
+}
+ .content .table{
+    border-collapse: collapse;
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 0px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    background-attachment: scroll;
+} 
+
+
+.table thead tr{
+    color: rgb(68, 61, 61);
+    text-align: center;
+    
+}
+
+.table td a{
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 22px;
+    transition: 0.4s ease-in;
+}
+.table td a:hover{
+    color: #044642;
+}
+
+  table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: #abeec6;
+  }
+
+  th, td {
+    border-style:outset;
+  }
