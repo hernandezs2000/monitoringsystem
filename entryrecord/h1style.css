@@ -36,10 +36,10 @@ button{
     align-items: center;
 }
 .recordbg{
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: 100%;
-    background: url(../images/bgsub.jpg) no-repeat;
+   background: url(../images/bgsub.jpg) repeat-y; 
     background-size: 100% 100%;
     background-position: center;
     overflow: auto;

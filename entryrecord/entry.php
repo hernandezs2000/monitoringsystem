@@ -1,74 +1,96 @@
-<?php
-/* display yung mga values */
-
-$jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/entrance/"); // json ito
-$stringD = json_decode($jsonD);
-$stringUser = $stringid = $stringemail = array();
-//get number of users
-$count = $stringD -> count;
-$count = intval($count-1);
-$results=$stringD -> results;
-
-for($ctr = $count; $ctr <= 0; $ctr--){
-  $id = $results[$ctr];  
-  print_r($id);
-}
-
-
-
-?>
-<!-- if($id == $idnum){ //condition that shows that gotten value id is equal to the object id        
-     $username = $results[$ctr] -> username; // display username
-   //ifelse statements that make sure that dec, email, profpic are not null 
-   if(!empty($results[$ctr] -> declaration[0])){
-     $declaration = $results[$ctr] -> declaration[0]; //url of declaration
-   } else{
-     echo "no declaration status";
-   }
-   if(!empty($results[$ctr] -> email)){
-     $email = $results[$ctr] -> email; // display email
-   } else{
-     echo "no email";
-   }
- } -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
 	    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Time-in Record</title>
+        <title>Home Page</title>
+        <script src="clock.js"></script>
         <link rel="stylesheet" type="text/css" href="h1style.css">
     </head>
-        <body>
+        <body onload="realtimeClock();initClock();">
          <div class="thome"> 
           <nav class="navbar">
             <div class="nav_links">
               <img src="/images/finallogo.png" alt="logo">
                 <ul class="list">
-                  <li><a href="/main/home.php"`>Home</a></li>
+                  <li><a href="home.php"`>Home</a></li>
                   <li><a href="/admin/admin.php">Admin Panel</a></li>
                   <li><a href="/user/user.php">User Profile</a></li>
                 </ul>
                 <a href="/logout/logout.php" class="btn"><button>Logout</button></a>
             </div>
           </nav>
-          <div class="recordbg">
-          <table class="entrant">
-            <tr>
-              <th>Name</th>
-              <th>Vaccination Status</th>
-              <th>Health Declaration</th>
-              <th>Temperature, <span>&#176;</span>C</th>
-              <th>Date</th>
-              <th>Entry</th>
-              <th>Denied</th>
-            </tr>
-            <?php
-            
-            ?>
-          </table>
-          </div>
-        </div>
+          <div class="content">
+          <table class = "table">
+    <?php
+        /* display yung mga values */
+
+        $jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/entrance/"); // json ito
+        $stringD = json_decode($jsonD);
+        $allowed = $temp = $usrid = $datetime = $date = $time = array();
+        //get number of users
+        $count = count($stringD);
+        $countr = $count - 1;
+
+
+        for($ctr = 0; $ctr <= $countr; $ctr++){
+            $temp0 = $stringD[$ctr] -> temp;
+            $allowed0 = $stringD[$ctr] -> allowed;
+            $datetime0 = $stringD[$ctr] -> datetime;
+            $usrid0 = $stringD[$ctr] -> usrid;
+            $temp[] = $temp0; //temperature FINAL 
+            $allowed[] = $allowed0; //
+            $datetime1[] = $datetime0;
+            $date0 = substr($datetime1[0],0,10); // DATE FINAL
+            $time0 = substr($datetime1[0],12,-8); // TIME FINAL
+            $date[] = $date0;
+            $time[] =$time0;
+            $usrid[] = $usrid0; // id number FINAL
+        }
+
+        $idcount = count($usrid);
+        $rlidc = $idcount - 1; /* number of user sa array -1 nung usrid*/
+        $username = $vacstat = $stat = array();
+            for ($ctr0 = 0; $ctr0 <= $rlidc; $ctr0++){
+                $file1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/".$usrid[$ctr0]."/");
+                $filer1 = json_decode($file1);
+                $getdec = $filer1 -> declaration[0]; /* NAKUHA KO URL NA NEED KO TALAGA TO GET INFO  ABOUT EMAIL AND DECLARATION*/
+                $file2 = file_get_contents($getdec);
+                $filer2 = json_decode($file2);
+                $username0 = $filer2 -> owner;
+                $vacstat0 = $filer2 -> vaccinated; /* naka true, boolean */
+                $stat0 = $filer2 -> stat;
+                $username[] = $username0; //username FINAL
+                $vacstat[] = $vacstat0;  // Vaccination status FINAL
+                $stat[] = $stat0; // HEALTH DEC FINAL
+            }
+        //needed values Name	Vaccination Status	Health Declaration	Temperature, °C	Date	Entry	Denied
+        // /entrance/ - temp,allowed,time,date, userid
+
+        $allowcount = count($stat);
+        $rlallow = $allowcount - 1; /* number of user sa array -1 nung usrid*/
+        $entry = $denied = array();
+            for ($ctr0 = 0; $ctr0 <= $rlallow; $ctr0++){
+                if($allowed[$ctr0] == 1){ //I HAVE ALLOWED NA FINAL
+                    $entry[] = $time[$ctr0];
+                    $denied[] = ""; 
+                } else {
+                        $entry[] = "";
+                        $denied[] = $time[$ctr0]; 
+                  }
+            }
+        $row = 0; 
+            echo "<thead><tr><th>ID</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
+                while(($countr - $row - 1) >= 0){
+                echo "<tr><td><a href = '/user/profile.php?id={$usrid[$countr -$row - 1]}'  name ='usrid'>".$usrid[$countr -$row - 1]."</a></td><td name='username'>".$username[$countr -$row - 1]."</td><td name='vacstat'>".$vacstat[$countr -$row - 1]."</td><td>".$stat[$countr -$row - 1]."</td><td>".$temp[$countr -$row - 1]."</td><td>".$date[$countr -$row - 1]."</td><td>".$entry[$countr -$row - 1]."</td><td>".$denied[$countr -$row - 1]."<td></tr>";
+                $row++;
+                }
+            echo "</table>"; 
+
+        ?>
+    </table>
+         </div>
         </body>
 </html>
+

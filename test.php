@@ -1,136 +1,3 @@
-<?php
-//needed values Name	Vaccination Status	Health Declaration	Temperature, °C	Date	Entry	Denied
-// /entrance/ - temp,allowed,time,date, userid
-
-
-
-$id = "5";
-$url1 = file_get_contents("https://gatesystemapi.herokuapp.com/entrance/?page=".$id."");
-//print_r($url1); //this shows the content in json, not yet in string.
-
-
-
-
-
-
-/* this is  */
-$url = "https://gatesystemapi.herokuapp.com/entrance/?page=5";
-$word = basename($url,"?page=");
-//$random = $word[6]; /* This shows the number 5 */
-
-
-
-
-
-//check if the url exist
-
-/* $file = 'https://gatesystemapi.herokuapp.com/entrance/?page=5';
-$file_headers = @get_headers($file);
-print_r($file_headers);
-$header = $file_headers[0];
-if($header == "HTTP/1.1 404 Not Found"){
-    $exists = "doesnt exist";
-    echo $exists;
-} else{
-    if($header == "HTTP/1.1 200 OK"){
-    /* shows na  HTTP/1.1 200*/
-/*     $exists = "exist";
-    echo $exists; */
-/*     }
-} */ 
-
-/* -----------------------------------------------------CODE PARA MAKUHA YUNG MGA END PAGE */
-
-  $count=8;
-
-for ($ctr = 1; $ctr <= $count; $ctr++){
-    $id = $ctr;
-    $url1 = "https://gatesystemapi.herokuapp.com/entrance/?page=".$id."";
-    $file_headers1 = @get_headers($url1);
-    $header = $file_headers1[0];
-        if($header == "HTTP/1.1 404 Not Found"){
-            $key = $ctr;
-            break;
-        }
-        
-}
-echo "page:".$key.""; // set as counter ng page 7(-1) to 1
-
-
-
-/* ----------------------next is extract naman yung info from one url or page --------------------- */
-
-$file = file_get_contents('https://gatesystemapi.herokuapp.com/entrance/?page=6');
-$filer = json_decode($file);
-$content = $filer -> results;
-$array =  count($content) ; // lumabas na yung number of {} churba, which is 6 from the time of last code bilang starts sa 0
-$array1 = $array - 1;
-$temp = $allowed = $time = $date = $usrid = array();
-
-   foreach($filer -> results as $arr) { //pabalik because yung last na array is always the latest sa page
-        $temp0 = $arr -> temp;
-        $allowed0 = $arr -> allowed;
-        $time0 = $arr -> time;
-        $date0 = $arr -> date;
-        $usrid0 = $arr -> usrid;
-        $temp[] = $temp0;
-        $allowed[] = $allowed0;
-        $time[] = $time0;
-        $date[] = $date0;
-        $usrid[] = $usrid0;
-    } 
-
-print_r($usrid); // FINALLY
-
-
-/* -------Get ko naman yung username, declaration -------------- */
-
-$idcount = count($usrid);
-$rlidc = $idcount - 1; /* number of user sa array -1 nung usrid*/
-$username = $vacstat = array();
-    for ($ctr0 = 0; $ctr0 <= $rlidc; $ctr0++){
-        $file1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/".$usrid[$ctr0]."/");
-        $filer1 = json_decode($file1);
-        $getdec = $filer1 -> declaration[0]; /* NAKUHA KO URL NA NEED KO TALAGA TO GET INFO  ABOUT EMAIL AND DECLARATION*/
-        $file2 = file_get_contents($getdec);
-        $filer2 = json_decode($file2);
-        $username0 = $filer2 -> owner;
-        $vacstat0 = $filer2 -> vaccinated; /* naka true, boolean */
-        $username[] = $username0;
-        $vacstat[] = $vacstat0; 
-    }
-
-    print_r($vacstat);
-/* ---------------------------------CODE FOR GETTING THE INFO PER EXISTING PAGES-------------- */
-/* for($ctr2 = $key; $ctr2 >= 1; $ctr2--){
-    $file = file_get_contents('https://gatesystemapi.herokuapp.com/entrance/?page='.$ctr2.'');
-} */
-
-
-
-
-
-
-
-
-/* ----------------------FINAL CODE--------------------------- */
-/*  $file = 'https://gatesystemapi.herokuapp.com/entrance/?page=1';
-$file_headers = @get_headers($file);
-print_r($file_headers);
-$header = $file_headers[0];
-if($header == "HTTP/1.1 200 OK"){
- */
-/* ------------------- insert dito na pwede ka mag extract from page 7 to 1. tas separate extract doon sa /entrance*/
-
-
-/* } else{ */
-    /* ------------------- insert dito na pwede ka mag extract from the file https://gatesystemapi.herokuapp.com/entrance/ ONLY*/
-/* }  */
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -141,7 +8,74 @@ if($header == "HTTP/1.1 200 OK"){
         <link rel="stylesheet" type="text/css" href="tstyle.css">
     </head>
     <body>
+    <table class = "table">
+    <?php
+        /* display yung mga values */
 
+        $jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/entrance/"); // json ito
+        $stringD = json_decode($jsonD);
+        $stringUser = $stringid = $stringemail = array();
+        //get number of users
+        $count = count($stringD);
+        $countr = $count -1;
+
+
+        for($ctr = $countr; $ctr >= 0; $ctr--){
+            $temp0 = $stringD[$ctr] -> temp;
+            $allowed0 = $stringD[$ctr] -> allowed;
+            $datetime0 = $stringD[$ctr] -> date;
+            $usrid0 = $stringD[$ctr] -> usrid;
+            $temp[] = $temp0; //temperature FINAL 
+            $allowed[] = $allowed0; //
+            $datetime[] = $datetime0; 
+            $date[] = substr($datetime[$ctr0],0,10); // DATE FINAL
+            $time[] = substr($datetime[$ctr0],11,19); // TIME FINAL
+            $usrid[] = $usrid0; // id number FINAL
+        }
+
+        $idcount = count($usrid);
+        $rlidc = $idcount - 1; /* number of user sa array -1 nung usrid*/
+        $username = $vacstat = $stat = array();
+            for ($ctr0 = 0; $ctr0 <= $rlidc; $ctr0++){
+                $file1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/".$usrid[$ctr0]."/");
+                $filer1 = json_decode($file1);
+                $getdec = $filer1 -> declaration[0]; /* NAKUHA KO URL NA NEED KO TALAGA TO GET INFO  ABOUT EMAIL AND DECLARATION*/
+                $file2 = file_get_contents($getdec);
+                $filer2 = json_decode($file2);
+                $username0 = $filer2 -> owner;
+                $vacstat0 = $filer2 -> vaccinated; /* naka true, boolean */
+                $stat0 = $filer2 -> stat;
+                $username[] = $username0; //username FINAL
+                $vacstat[] = $vacstat0;  // Vaccination status FINAL
+                $stat[] = $vacstat0; // HEALTH DEC FINAL
+            }
+        //needed values Name	Vaccination Status	Health Declaration	Temperature, °C	Date	Entry	Denied
+        // /entrance/ - temp,allowed,time,date, userid
+
+        $allowcount = count($stat);
+        $rlallow = $allowcount - 1; /* number of user sa array -1 nung usrid*/
+        $entry = $denied = array();
+            for ($ctr0 = 0; $ctr0 <= $rlallow; $ctr0++){
+                if($allowed[$ctr0] = true){ //I HAVE ALLOWED NA FINAL
+                    $entry[] = $allowed[$ctr0];
+                    $denied[] = ""; 
+                } else {
+                    if($allowed[$ctr0] = false){
+                        $entry[] = "";
+                        $denied[] = $allowed[$ctr0]; 
+                }
+                }
+            }
+        $row = 0; 
+            echo "<thead><tr><th>ID</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
+                while(($countr - $row - 1) >= 0){
+                echo "<tr><td><a href = '/user/profile.php?id={$usrid[$countr -$row - 1]}'  name ='usrid'>".$usrid[$countr -$row - 1]."</a></td><td name='username'>".$username[$countr -$row - 1]."</td><td name='vacstat'>".$vacstat[$countr -$row - 1]."</td><td>".$stat[$countr -$row - 1]."</td><td>".$temp[$countr -$row - 1]."</td><td>".$date[$countr -$row - 1]."</td><td>".$time[$countr -$row - 1]."</td><td>".$entry[$countr -$row - 1]."</td><td>".$denied[$countr -$row - 1]."<td></tr>";
+                $row++;
+                }
+            echo "</table>"; 
+
+        ?>
+    </table>
     </body>
 </html>
 

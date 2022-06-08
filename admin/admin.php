@@ -120,7 +120,7 @@
                   <input type='password' id='password' name='password' placeholder='Enter password'>
                 </div>
                 <div class='form-element'>
-                  <button>Register</button>
+                  <button name='regreg'>Register</button>
               </form>
               </div>
             </div>
@@ -132,8 +132,60 @@
         echo "<style>.popup .close-btn{ display: none;}</style>";
       }
     }
+
+    /* ----------------------------------------------REGISTER OF USERS------------------------------- */
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      if(isset($_POST['regreg'])){
+        $url= "http://gatesystemapi.herokuapp.com/api/admin/register/";
+        $user0 = $_POST['username']; /* labas nito is false or true*/
+        $email0 =  $_POST['email'];
+        $pass = $_POST['password'];
+
+          //Check for invalid shit 
+        if(!empty($email0) && !empty($pass) && !empty($email0)){
+          // Create a new cURL resource
+          $ch = curl_init($url);
+    
+          // Setup request to send json via POST`
+          $payload = json_encode( 
+            array(
+              'username' => $user0,
+              'password' => $pass,
+              'email' => $email0
+            )
+          );
+    
+          // Attach encoded JSON string to the POST fields
+          curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    
+          // Set the content type to application/json
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+    
+          // Return response instead of outputting
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+          // Execute the POST request
+          $result = curl_exec($ch);
+    
+          // Get the POST request header status
+          $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+          // If header status is not Created or not OK, return error message
+          if ( $status != 201 ) {
+            die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+          }
+    
+          if ( $status == 201 ) {
+            //include ikaw ng command para magrefresh yung page.
+    
+            header("Location:../admin/admin.php");
+          } 
+    
+          // Close cURL resource
+          curl_close($ch);
+        }
+      }
+    }        
     ?>
         </body>
 </html>
-<script>
-    </script>
