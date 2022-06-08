@@ -181,6 +181,7 @@ button{
     padding: 20px;
 }
 
+
 .thome .contparent .vaccination{
     width: 60%;
     padding-top: 20px;
@@ -204,6 +205,7 @@ button{
     backdrop-filter: blur(40px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
     margin-left: 155px;
+    margin-bottom: 15px;
 }
 
 .contparent .profpic .card .img-bx{
@@ -214,7 +216,8 @@ button{
     height: 100%;
     border-radius: 10px;
     overflow: hidden;
-    transform: translateY(30px) scale(0.5);
+    transform: scale(0.5);
+    top: 6px;
     transform-origin: top;
     box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
                 15px 15px 15px rgba(0, 0, 0, 0.1);

@@ -46,7 +46,7 @@
                   if($vacstat == 1){
                     $vacstats = "'vaccinated'";
                   } else{
-                    if($vacstat== 0){
+                    if($vacstat == 0){
                       $vacstats = "'not vaccinated'";
                     }
                   }
@@ -144,7 +144,7 @@
                       <?php
                       /* YOU'LL BE GETTING THE VALUES OF DEC SAGOT*/
                       ?>
-                      <form class = "chck-box" action="../user/user.php?update=success" method = "POST">
+                      <form class = "chck-box" method = "POST">
                         
                         <div class = "q">
                           <h4>Q1: vaccinated</h4>
@@ -232,7 +232,7 @@
                              /* GET THE VALUES FROM THE FORM*/
                               if ($_SERVER["REQUEST_METHOD"] == "POST"){
                                 if(isset($_POST['submit'])){
-                                  $one = $_POST['complete'];
+                                  $one = $_POST['complete']; /* labas nito is false or true*/
                                   $two =  $_POST['complete2'];
                                   $three = $_POST['complete3'];
                                   $four = $_POST['complete4'];
@@ -243,9 +243,13 @@
                                   $nine = $_POST['complete9'];
                                   $ten = $_POST['complete10'];
                                 }
+
+                                $dec = "https://gatesystemapi.herokuapp.com/declaration/";
+                                $stringW = json_decode($url);
+                                $decla = $stringW -> results[2];
                                 /* NOW YOU PUT THE PATCH REQUEST TO SEND THE VALUES*/
-                                $curl = curl_init($declaration);
-                                curl_setopt($curl, CURLOPT_URL, $declaration);
+                                $curl = curl_init($dec);
+                                curl_setopt($curl, CURLOPT_URL, $dec);
                                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
                                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                                 

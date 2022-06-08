@@ -26,7 +26,7 @@
             <form class="loginForm" id="form" action="/main/home.php" method="POST">
                 <div class="form-content">
                     <div class="login-form">
-                        <div class="title">Login</div>
+                        <div class="title">Sign in</div>
                         <div class="input-boxes">
                             <div class="input-box">
                                 <img src="images/mail.png">

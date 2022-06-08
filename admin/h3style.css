@@ -90,8 +90,39 @@ button{
 /* Hatian for low height*/
 .content .table{
     height: 85%;
-    background-color: #044642;
+    width: 1070px;
+    border-radius: 3px;
+    margin-left: 15px;
+    background-color: #ffffffd7;
+    white-space: nowrap;
+    position: relative;
+    overflow-x: auto;
 }
+/* TRY ITONG PART FOR THE SLIDER NG USERS */
+.user{
+    width: 240px;
+    padding: 0;
+    height: 280px;
+    float: none;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 40px;
+    border-radius: 3px;
+    background-color: #b2d0e7;
+    display: inline-block;
+    box-shadow:  -15px -15px 15px rgba(255, 255, 255, 0.2),
+    15px 15px 15px rgba(0, 0, 0, 0.1);
+    
+}
+/* .user{
+    width:200px;
+    height: 200px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+
+} */
+
 /* ------------------------------END OF NEW PART FOR TABLE -----------------------------*/
 
 /* Combination of top and bottom height */
@@ -105,13 +136,13 @@ button{
     background: rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(40px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
+    15px 15px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Hatian for top height*/
 .content .btn-card{
     height: 15%;
-/*     background-color: #68e2da; */
 }
 
 
@@ -124,14 +155,18 @@ button{
     padding: 8px 26px;
     color: #fff;
     width: 200px;
-/*     border-radius: 30px; this is for button*/
     box-shadow: 0 0 0 0 rgba(255, 188, 87, 0.5), 0 0 0 0 rgba(39, 200, 255, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.content .cont .register{
+.content .cont .register,
+.content .cont .register button{
     text-decoration: none;
     font-size: 14px;
+}
+button[name="but"]{
+    border: none;
+    background:none;
 }
 
 .content .cont::after{
@@ -159,3 +194,100 @@ button{
 .content .cont:hover::after{
     transform: rotate(150deg);
 }
+
+/* THIS IS FOR SCROLLBAR*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    /* background: #999191; */
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(33, 114, 71);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(25, 81, 51);
+    border-radius: 10px;
+  }
+
+
+  /* ----------------------para sa pop up------------------ */
+  .popup {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      width: 380px;
+      padding: 20px 30px;
+      background: #fff;
+      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+  }
+
+  .popup .close-btn{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 15px;
+      height: 15px;
+      background-color: #888;
+      color: #eee;
+      text-align: center;
+      line-height: 15px;
+      cursor: pointer;
+      border: none;
+  }
+
+  .popup .form h2{
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+  }
+
+  .popup .form .form-element{
+      margin: 15px 0px;
+  }
+
+  .popup .form .form-element label{
+      font-size: 14px;
+      color: #222;
+  }
+
+  .popup .form .form-element input[type="text"],
+  .popup .form .form-element input[type="password"]{
+      margin-top: 5px;
+      display: block;
+      width:100%;
+      padding:10px;
+      outline: none;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+  }
+
+  .popup .form .form-element button {
+      margin-top: 9px;
+      width: 100%;
+      height: 40px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: rgb(37, 115, 68);
+      color: #f5f5f5;
+      border-radius: 10px;
+      cursor: pointer;
+  }
+
+  .popup .form .form-element button:hover{
+    background: rgb(26, 83, 49);
+  } 
