@@ -124,6 +124,20 @@
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             $result = curl_exec($ch);
                             $result = json_decode($result);
+      
+                            // Get the POST request header status
+                            $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                            
+                            if ( $status != 204 ) {
+                              header("Location:../admin/admin.php?delete=error");
+                            }
+                      
+                            if ( $status == 204 ) {
+                              //include ikaw ng command para magrefresh yung page.
+                              echo "<script type='text/javascript'>
+                              window.location.reload(true);
+                              </script>";
+                            } 
                             curl_close($ch);
                           }
                         }
@@ -207,14 +221,16 @@
           $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     
           // If header status is not Created or not OK, return error message
-          if ( $status != 201 ) {
+          if ( $status != 200 ) {
             die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
           }
     
-          if ( $status == 201 ) {
+          if ( $status == 200 ) {
             //include ikaw ng command para magrefresh yung page.
-    
-            header("Location:../admin/admin.php");
+            echo "<script type='text/javascript'>
+            window.location.reload(true);
+            </script>";
+            //header("Location:../admin/admin.php");
           } 
     
           // Close cURL resource
