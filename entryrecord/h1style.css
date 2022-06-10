@@ -133,3 +133,16 @@ button{
   th, td {
     border-style:outset;
   }
+
+  
+.table td a{
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 22px;
+    color: #34706c;
+    transition: 0.4s ease-in;
+}
+.table td a:hover{
+    color: #044642;
+}

@@ -101,12 +101,12 @@
     
                     $row = 0; 
                     echo "<thead><tr><th>ID</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
-                        while(($countr - $row - 1) >= 0){
-                            echo "<tr><td>".$usrid[$countr -$row - 1]."</td><td name='username'>".$username[$countr -$row - 1]."</td><td name='vacstat'>".$vacstat2[$countr -$row - 1]."</td><td>".$stat3[$countr -$row - 1]."</td><td>".$temp[$countr -$row - 1]."</td><td>".$date[$countr -$row - 1]."</td><td>".$entry[$countr -$row - 1]."</td><td>".$denied[$countr -$row - 1]."<td></tr>";
+                        while($row <= $countr){
+                            echo "<tr><td>".$usrid[$row]."</td><td name='username'><a href = '/user/profile.php?id={$usrid[$row]}'  name ='id'>".$username[$row]."</a></td><td name='vacstat'>".$vacstat2[$row]."</td><td>".$stat3[$row]."</td><td>".$temp[$row]."</td><td>".$date[$row]."</td><td>".$entry[$row]."</td><td>".$denied[$row]."<td></tr>";
                             $row++;
                         }
                             echo "</table>"; 
-header("Refresh:3");
+                    header("Refresh:3");
                 ?>
             </table>
           </div>
