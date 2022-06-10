@@ -1,5 +1,4 @@
 <?php
-//echo '<script type="text/javascript">POSTReq();</script>';
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

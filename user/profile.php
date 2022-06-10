@@ -274,12 +274,24 @@
                                 );
                                 
                                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                                
                                 //for debug only!
                                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
                                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                                
+                                // Get the POST request header status
+                                $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                                 $resp = curl_exec($curl);
+
+                                 if ( $resp == null ) {
+                                  header("Location:../user/profile.php?edit=error");
+                                }
+                          
+                                if ( $status != null ) {
+                                  //include ikaw ng command para magrefresh yung page.
+                                  echo "<script type='text/javascript'>
+                                  window.location.reload(true);
+                                  </script>";
+                                  //header("Location:../admin/admin.php");
+                                }  
                                 curl_close($curl);
 
                               }

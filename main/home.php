@@ -5,7 +5,7 @@ echo '<script type="text/javascript">initClock();</script>';
 //----------------------------------------LOGIN POST REQUEST----------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST['submit'])){
-    $url= "http://gatesystemapi.herokuapp.com/api/login/"; // lagay dito si Noel
+    $url= "http://gatesystemapi.herokuapp.com/api/admin/login/"; // lagay dito si Noel
     //get data from signup form
     $emUs = $_POST['email'];
     $password = $_POST['password'];
@@ -42,28 +42,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       // Get the POST request header status
       $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+      // if you need to process the response from the API further
+      $response = json_decode($result, true);
+
       // If header status is not Created or not OK, return error message
       if ( $status != 200 ) {
-        die("Error: call to URL $url failed with status $status, response $result, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch));
+        header("Location:../index.php?login=error");
+        exit();
       }
 
       if ( $status == 200 ) {
         header("Location:../main/home.php");
+        exit();
       } 
 
       // Close cURL resource
       curl_close($ch);
 
-      // if you need to process the response from the API further
-      $response = json_decode($result, true);
+
 
     }  else{
       header("Location:../index.php?login=incomplete");
       exit();
     }      
                   
-  } else{
-  }       
+  } 
 }
 
 

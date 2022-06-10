@@ -106,7 +106,7 @@
                             $row++;
                         }
                             echo "</table>"; 
-
+header("Refresh:3");
                 ?>
             </table>
           </div>
