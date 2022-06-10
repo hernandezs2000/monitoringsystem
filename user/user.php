@@ -107,6 +107,7 @@
 
                 } else{ //pag wala laman ang post WOOOW
                   $row = 0; 
+                  $countr = count($user); 
                   echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
                     if(!empty($user) && !empty($id) && !empty($email)){
                       while(($countr - $row - 1) >= 0){
