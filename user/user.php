@@ -90,14 +90,7 @@
                       echo "</table>";
                   }
                 }
-            
 
-                $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                if (strpos($fullUrl, "update=success") == true){
-                    echo "<script>
-                    window.confirm('Successfully updated users personal information');
-                    </script>";
-                }
             ?>
           </table>
         </div>
