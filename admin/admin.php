@@ -102,7 +102,7 @@
                       }
 
                       $row = 0; 
-                      echo "<thead><tr><th>ID</th><th>Admins' username</th><th>E-mail</th><th>Operation</th></tr></thead>";
+                      echo "<thead><tr><th>ID</th><th>Admin's username</th><th>E-mail</th><th>Operation</th></tr></thead>";
                         if(!empty($user) && !empty($id) && !empty($email)){
                           while(($rlcount - $row - 1) >= 0){
                             echo "<tr><form method='POST'><td name ='id'>".$id[$count -$row - 1]."</td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td><td><button name='submit' value='".$id[$count -$row - 1]."'>Delete</button></td></form></tr>";
