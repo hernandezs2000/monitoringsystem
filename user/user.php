@@ -30,6 +30,7 @@
 
           <table class = "table">
             <?php
+            /* GET USER */
             $jsonD = file_get_contents("http://gatesystemapi.herokuapp.com/users/"); // json ito
             $stringD = json_decode($jsonD);
             $stringUser = $stringid = $stringemail = array();
@@ -47,6 +48,42 @@
                 $email[] = $email0;
               }
 
+            /* GET ADMIN */
+            $jsonA = file_get_contents("https://gatesystemapi.herokuapp.com/api/admin/");
+            $stringA = json_decode($jsonA);
+            $resultA = $stringA -> results;
+            $adminA = array();
+            foreach($resultA as $arr) {
+              $id1 = $arr -> id;
+              $adminA[] = $id1; //get all id na admin
+            }
+            
+              /* ERASE THE ADMIN */
+              $adminAcount = count($adminA);
+              $rladminA = $adminAcount - 1; /* number of user sa array -1 nung usrid*/
+              $place3 = array();
+                  for ($ctr0 = 0; $ctr0 <= $rladminA; $ctr0++){
+                    if(in_array($adminA[$ctr0], $id)){
+                    $place0 = array_search($adminA[$ctr0], $id);
+                    $place3[] = $place0; //get lahat ng places sa $id na merong adminid  
+                    }else{
+                      break;
+                    }
+                  }
+              if(!empty($place3)){  
+                  //unset na natin
+                  $place3c = count($place3);
+                  $rplace3c = $place3c - 1;
+                  for ($ctr0 = 0; $ctr0 <= $rplace3c; $ctr0++){
+                    unset($user[$place3[$ctr0]]);
+                    unset($id[$place3[$ctr0]]);
+                    unset($email[$place3[$ctr0]]);
+                  }
+                  $user = array_values($user);
+                  $id = array_values($id);
+                  $email = array_values($email);
+
+              }            
 
             // pag nag post
               if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -54,6 +91,7 @@
                 if(!empty($_POST['q'])){ // pag may laman ang post
                   $post  = $_POST['q'];
                     if(in_array($post, $user)){ // tingnan kung nandun yung user    WOOOW
+                      $countr = count($user);
                       $place = array_search($post, $user); //int na pangilan yung user
                       echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
                        if(!empty($user) && !empty($id) && !empty($email)){
@@ -71,8 +109,8 @@
                   $row = 0; 
                   echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
                     if(!empty($user) && !empty($id) && !empty($email)){
-                      while(($count - $row - 1) >= 0){
-                        echo "<tr><td><a href = '/user/profile.php?id={$id[$count -$row - 1]}'  name ='id'>".$id[$count -$row - 1]."</a></td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td></tr>";
+                      while(($countr - $row - 1) >= 0){
+                        echo "<tr><td><a href = '/user/profile.php?id={$id[$countr -$row - 1]}'  name ='id'>".$id[$countr -$row - 1]."</a></td><td name='users'>".$user[$countr -$row - 1]."</td><td name='users'>".$email[$countr -$row - 1]."</td></tr>";
                         $row++;
                       }
                         echo "</table>";
@@ -80,11 +118,12 @@
                   }
                }
               } else{ //pag walang post WOOOWL
-                $row = 0; 
+                $row = 0;
+                $countr = count($user); 
                 echo "<thead><tr><th>ID</th><th>Registered User</th><th>E-mail</th></tr></thead>";
                   if(!empty($user) && !empty($id) && !empty($email)){
-                    while(($count - $row - 1) >= 0){
-                      echo "<tr><td><a href = '/user/profile.php?id={$id[$count -$row - 1]}'  name ='id'>".$id[$count -$row - 1]."</a></td><td name='users'>".$user[$count -$row - 1]."</td><td name='users'>".$email[$count -$row - 1]."</td></tr>";
+                    while(($countr - $row - 1) >= 0){
+                      echo "<tr><td><a href = '/user/profile.php?id={$id[$countr -$row - 1]}'  name ='id'>".$id[$countr -$row - 1]."</a></td><td name='users'>".$user[$countr -$row - 1]."</td><td name='users'>".$email[$countr -$row - 1]."</td></tr>";
                       $row++;
                     }
                       echo "</table>";
