@@ -277,11 +277,15 @@
                                 //for debug only!
                                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
                                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                                // Get the POST request header status
+                                $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                                 $resp = curl_exec($curl);
+
+                                  echo "<script type='text/javascript'>
+                                  window.location.href = 'user.php';
+                                  </script>";
                                 curl_close($curl);
-                                
-                                echo "<script type='text/javascript'> window.location.rel='noopener' target='_blank' href = '../user/user.php';
-                                </script>";
+
                               }
                             ?>
                   </div>
