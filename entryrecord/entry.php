@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
-	    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="refresh" content="2">
+        <meta http-equiv="refresh" content="2">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Time-in Record</title>
         <script src="clock.js"></script>
         <link rel="stylesheet" type="text/css" href="h1style.css">
@@ -34,8 +34,18 @@
                 /* get all values in the tenentrance */
                 $usrid = array();
                 for($ctr = 0; $ctr <= $countr; $ctr++){
+                    $temp0 = $stringD[$ctr] -> temp;
+                    $allowed0 = $stringD[$ctr] -> allowed;
+                    $datetime0 = $stringD[$ctr] -> datetime;
                     $usrid0 = $stringD[$ctr] -> usrid;
-                     $usrid[] = $usrid0; // id number displayed in tenentrance
+                    $temp[] = $temp0; //temperature 
+                    $allowed[] = $allowed0; 
+                    $date0 = substr($datetime0,0,10); // DATE 
+                    $time0 = substr($datetime0,11,-13); // TIME 
+                    $date[] = $date0;
+                    $time[] =$time0;
+                    $usrid0 = $stringD[$ctr] -> usrid;
+                    $usrid[] = $usrid0; // id number displayed in tenentrance
                 }
                 /* get the information in admins */
                 $jsonD0 = file_get_contents("https://gatesystemapi.herokuapp.com/api/admin/"); // json ito
@@ -48,7 +58,21 @@
                     $adid = $results[$ctr] -> id;
                     $adminid[] = $adid; // admin id are stored here
                 }
-
+                $num = count($adminid);
+                /* Search for admin placement */
+                for($ctr0 = 0; $ctr0 <= $num -1; $ctr0++){
+                $key[] = array_search($adminid[$ctr0], $usrid);
+                    if($key[$ctr0] == 1){
+                        unset($temp[$ctr0]);
+                        unset($allowed[$ctr0]);
+                        unset($date[$ctr0]);
+                        unset($time[$ctr0]);
+                        $temp = array_values($temp);
+                        $allowed = array_values($allowed);
+                        $date = array_values($date);
+                        $time = array_values($time);
+                    }
+                }   
                 /* get ko yung id and neglect admin and non existing IDs */
                 /* After, display mo yung mga information of the users only! */
                 $idcount = count($usrid);
@@ -59,7 +83,7 @@
                         $adminless[] = $usrid[$ctr0]; // id in tententrance that are doesn't include the admin
                     }
                 }
-
+                
                 /* Get information from the /users/*/
                 $jsonD1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/"); // json ito
                 $stringD1 = json_decode($jsonD1);
@@ -71,6 +95,24 @@
                     $userid0 = $results0[$ctr] -> id;
                     $userid[] = $userid0; // user id are stored here
                 }
+
+                $num1 = count($adminless);
+                /* Search for admin placement */
+                for($ctr0 = 0; $ctr0 <= $num1 -1; $ctr0++){
+                $key1[] = array_search($adminless[$ctr0], $userid);
+                    if($key1[$ctr0] == 0){
+                        unset($temp[$ctr0]);
+                        unset($allowed[$ctr0]);
+                        unset($date[$ctr0]);
+                        unset($time[$ctr0]);
+                        $temp = array_values($temp);
+                        $allowed = array_values($allowed);
+                        $date = array_values($date);
+                        $time = array_values($time);
+                    }  
+                }
+
+
                 /* Make a loop that makes sure that $adminless are all existing users through checking /users/ */
                 $count2 = count($adminless);
                 $countr2 = $count2 - 1;
@@ -79,48 +121,39 @@
                         $userless[] = $adminless[$ctr0]; // FINAL users to display in the entry record
                     }
                 }
+
                 /* Im gonna get the image from /users/ */
                 $count3 = $stringD1 -> count;
                 $count3 = intval($count3);
-                for($ctr0 = 0; $ctr0 <= $count3 - 1; $ctr0++){
-                    $id = $results0[$ctr0] -> id;
-                    if(in_array($id,$userless)){
-                        $profilepicture = $results0[$ctr0] -> profilepicture[0]; //url of profile picture
-                        $urlprofpic = $profilepicture;
-                        /* get the image inside*/
-                        $urlprofp = file_get_contents($urlprofpic); 
-                        $urlprofpr = json_decode($urlprofp);
-                        $profpic = $urlprofpr -> image;// here is the image link
-                        /* check if 404 */
-                            $count4 = count($userless);
-                            $countr4 = $count4 - 1;
-                            $file_headers = @get_headers($profpic);
-                            for($ctr=0; $ctr<=$countr4; $ctr++){
-                                if($file_headers and strpos( $file_headers[0], '404')){
-                                    $picture[$ctr] = "<img src='/images/noimage.jpg'>";
-                                } else{
-                                    $picture[$ctr] = "<img src= $profpic>";    //the pictures are showing na
-                                }
-                            }  
-                    }
-                }
-
-                /* Get the necessary information in the tenentrance using the $userlessa arrays */
                 $count4 = count($userless);
                 $countr4 = $count4 - 1;
 
-                for($ctr = 0; $ctr <= $countr4; $ctr++){
-                    $temp0 = $stringD[$userless[$ctr]] -> temp;
-                    $allowed0 = $stringD[$userless[$ctr]] -> allowed;
-                    $datetime0 = $stringD[$userless[$ctr]] -> datetime;
-                    $usrid0 = $stringD[$userless[$ctr]] -> usrid;
-                    $temp[] = $temp0; //temperature 
-                    $allowed[] = $allowed0; 
-                    $date0 = substr($datetime0,0,10); // DATE 
-                    $time0 = substr($datetime0,11,-13); // TIME 
-                    $date[] = $date0;
-                    $time[] =$time0;
+                for($ctr0 = 0; $ctr0 <= $countr4; $ctr0++){
+                   // $id = $results0[$ctr0] -> id;
+                    $key2[] = array_search($userless[$ctr0], $userid);
+                            $i = array_search($userless[$ctr0], array_keys($userid));
+                            $profilepicture = $results0[$i] -> profilepicture[0]; //url of profile picture
+                            $urlprofpic = $profilepicture;
+                            /* get the image inside*/
+                            $urlprofp = file_get_contents($urlprofpic); 
+                            $urlprofpr = json_decode($urlprofp);
+                            $profpic = $urlprofpr -> image;// here is the image link
+                            /* check if 404 */
+
+                                $file_headers = @get_headers($profpic);
+                                    if($file_headers and strpos( $file_headers[0], '404')){
+                                        $picture[] = "<img src='/images/noimage.jpg'>";
+                                    } else{
+                                        $picture[] = "<img src= $profpic>";    //the pictures are showing na
+                                    }
+                                    $picture = array_values($picture);
+                                                
                 }
+               
+
+                /* Get the necessary information in the tenentrance using the $userlessa arrays */
+
+
 
                 /* Get the other informations linked doon kay id  */
                 $username = $vacstat = $stat = array();
@@ -190,4 +223,5 @@
           </div>
         </body>
 </html>
+
 
