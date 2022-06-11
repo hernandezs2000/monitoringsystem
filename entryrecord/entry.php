@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
 	    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="refresh" content="2">
         <title>Time-in Record</title>
         <script src="clock.js"></script>
         <link rel="stylesheet" type="text/css" href="h1style.css">
@@ -180,11 +181,10 @@
                     $row = 0; 
                     echo "<thead><tr><th>ID</th><th>Image</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
                         while($row <= $countr4){
-                            echo "<tr><td>".$userless[$row]."</td><td>".$picture[$row]."</td><td name='username'><a href = '/user/profile.php?id={$userless[$row]}'  name ='id'>".$username[$row]."</a></td><td name='vacstat'>".$vacstat2[$row]."</td><td>".$stat3[$row]."</td><td>".$temp[$row]."</td><td>".$date[$row]."</td><td>".$entry[$row]."</td><td>".$denied[$row]."<td></tr>";
+                            echo "<tr><td>".$userless[$row]."</td><td><div name='pic'>".$picture[$row]."</div></td><td name='username'><a href = '/user/profile.php?id={$userless[$row]}'  name ='id'>".$username[$row]."</a></td><td name='vacstat'>".$vacstat2[$row]."</td><td>".$stat3[$row]."</td><td>".$temp[$row]."</td><td>".$date[$row]."</td><td>".$entry[$row]."</td><td>".$denied[$row]."<td></tr>";
                             $row++;
                         }
                             echo "</table>"; 
-                    header("Refresh:3");
                 ?>
             </table>
           </div>
