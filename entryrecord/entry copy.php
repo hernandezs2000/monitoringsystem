@@ -47,6 +47,7 @@
                     $usrid0 = $stringD[$ctr] -> usrid;
                     $usrid[] = $usrid0; // id number displayed in tenentran
                 }
+                print_r($time);
                 /* get the information in admins */
                 $jsonD0 = file_get_contents("https://gatesystemapi.herokuapp.com/api/admin/"); // json ito
                 $stringD0 = json_decode($jsonD0);
@@ -61,20 +62,19 @@
                 $num = count($usrid);
                 /* Search for admin placement */
                 for($ctr0 = 0; $ctr0 <= $num -1; $ctr0++){
-                  $key[] = array_search($usrid[$ctr0], $adminid); //1 inalis
-                }
-                foreach ($key as $array_key => $array_item) {
-                    if ($key[$array_key] === 0) {
-                      unset($temp[$array_key]);
-                      unset($allowed[$array_key]);
-                      unset($date[$array_key]);
-                      unset($time[$array_key]);
+                $key[] = array_search($usrid[$ctr0], $adminid);
+                    if($key[$ctr0] == 1){
+                        unset($temp[$ctr0]);
+                        unset($allowed[$ctr0]);
+                        unset($date[$ctr0]);
+                        unset($time[$ctr0]);
+                        $temp = array_values($temp);
+                        $allowed = array_values($allowed);
+                        $date = array_values($date);
+                        $time = array_values($time);
                     }
-                  }
-                  $temp = array_values($temp);
-                  $allowed = array_values($allowed);
-                  $date = array_values($date);
-                  $time = array_values($time);
+                }
+                print_r($time);
                 /* get ko yung id and neglect admin and non existing IDs */
                 /* After, display mo yung mga information of the users only! */
                 $idcount = count($usrid);
@@ -85,6 +85,7 @@
                         $adminless[] = $usrid[$ctr0]; // id in tententrance that are doesn't include the admin
                     }
                 }
+                
                 /* Get information from the /users/*/
                 $jsonD1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/"); // json ito
                 $stringD1 = json_decode($jsonD1);
@@ -100,20 +101,19 @@
                 $num1 = count($adminless);
                 /* Search for admin placement */
                 for($ctr0 = 0; $ctr0 <= $num1 -1; $ctr0++){
-                    $key1[] = !in_array($adminless[$ctr0], $userid);
+                $key1[] = array_search($adminless[$ctr0], $userid);
+                    if($key1[$ctr0] == 0){
+                        unset($temp[$ctr0]);
+                        unset($allowed[$ctr0]);
+                        unset($date[$ctr0]);
+                        unset($time[$ctr0]);
+                        $temp = array_values($temp);
+                        $allowed = array_values($allowed);
+                        $date = array_values($date);
+                        $time = array_values($time);
+                    }  
                 }
-                foreach ($key1 as $array_key => $array_item) {
-                    if ($key1[$array_key] == 1) {
-                      unset($temp[$array_key]);
-                      unset($allowed[$array_key]);
-                      unset($date[$array_key]);
-                      unset($time[$array_key]);
-                    }
-                  }
-                  $temp = array_values($temp);
-                  $allowed = array_values($allowed);
-                  $date = array_values($date);
-                  $time = array_values($time);
+                print_r($time);
 
                 /* Make a loop that makes sure that $adminless are all existing users through checking /users/ */
                 $count2 = count($adminless);
@@ -123,11 +123,36 @@
                         $userless[] = $adminless[$ctr0]; // FINAL users to display in the entry record
                     }
                 }
+                print_r($userless);
+
                 /* Im gonna get the image from /users/ */
                 $count3 = $stringD1 -> count;
                 $count3 = intval($count3);
                 $count4 = count($userless);
                 $countr4 = $count4 - 1;
+
+                for($ctr0 = 0; $ctr0 <= $countr4; $ctr0++){
+                   // $id = $results0[$ctr0] -> id;
+                    $key2[] = array_search($userless[$ctr0], $userid);
+                            $i = array_search($userless[$ctr0], array_keys($userid));
+                            $profilepicture = $results0[$i] -> profilepicture[0]; //url of profile picture
+                            $urlprofpic = $profilepicture;
+                            /* get the image inside*/
+                            $urlprofp = file_get_contents($urlprofpic); 
+                            $urlprofpr = json_decode($urlprofp);
+                            $profpic = $urlprofpr -> image;// here is the image link
+                            /* check if 404 */
+
+                                $file_headers = @get_headers($profpic);
+                                    if($file_headers and strpos( $file_headers[0], '404')){
+                                        $picture[] = "<img src='/images/noimage.jpg'>";
+                                    } else{
+                                        $picture[] = "<img src= $profpic>";    //the pictures are showing na
+                                    }
+                                    $picture = array_values($picture);
+                                                
+                }
+               
 
                 /* Get the necessary information in the tenentrance using the $userlessa arrays */
 
@@ -136,32 +161,18 @@
                 /* Get the other informations linked doon kay id  */
                 $username = $vacstat = $stat = array();
                 for($ctr = 0; $ctr <= $countr4; $ctr++){
+                    print_r($userless[$ctr]);
                     $file1 = file_get_contents("https://gatesystemapi.herokuapp.com/users/".$userless[$ctr]."/");
                     $filer1 = json_decode($file1);
-                    $filep = file_get_contents("https://gatesystemapi.herokuapp.com/profilepicture/".$userless[$ctr]."/");
-                    $filep1 = json_decode($filep);
-                    $picture0 = $filep1 -> image;
-                    $file2 = file_get_contents("https://gatesystemapi.herokuapp.com/declaration/".$userless[$ctr]."/");
+                    $getdec = $filer1 -> declaration[0]; /* NAKUHA KO URL NA NEED KO TALAGA TO GET INFO  ABOUT EMAIL AND DECLARATION*/
+                    $file2 = file_get_contents($getdec);
                     $filer2 = json_decode($file2);
                     $username0 = $filer2 -> owner;
                     $vacstat0 = $filer2 -> vaccinated; /* naka true, boolean */
                     $stat0 = $filer2 -> stat;
-                    $profilepicture[] = $picture0; 
                     $username[] = $username0; //username FINAL
                     $vacstat[] = $vacstat0;  // Vaccination status FINAL
                     $stat[] = $stat0; // HEALTH DEC FINAL
-                }
-
-                $coun = count($profilepicture);
-
-                for($ctr = 0; $ctr <= $coun - 1; $ctr++){
-                $file_headers = @get_headers($profilepicture[$ctr]);
-                if($file_headers and strpos( $file_headers[0], '404')){
-                    $picture[] = "<img src='/images/noimage.jpg'>";
-                } else{
-                    $picture[] = "<img src= $profilepicture[$ctr]>";    //the pictures are showing na
-                }
-                $picture = array_values($picture);
                 }
 
                 /* Im gonna display the entry and denied using ALLOWED */
@@ -203,6 +214,7 @@
                         }
                         $stat3[] = $stat[$ctr0];
                     }
+
                     $row = 0; 
                     echo "<thead><tr><th>ID</th><th>Image</th><th>Username</th><th>Vaccination status</th><th>Health Declaration</th><th>Temperature, °C</th><th>Date</th><th>Entry</th><th>Denied</th></tr></thead>";
                         while($row <= $countr4){
